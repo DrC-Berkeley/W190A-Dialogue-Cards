@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W190A Dialogue & Reflection Cards</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* UC Berkeley Colors */
+            --berkeley-blue: #003262;
+            --berkeley-gold: #FDB515;
+            --california-gold: #FFC72C;
+            --founders-rock: #3B7EA1;
+            --gradient1: linear-gradient(45deg, var(--berkeley-blue), var(--founders-rock));
+            --gradient2: linear-gradient(45deg, var(--berkeley-gold), var(--california-gold));
+            --gradient3: linear-gradient(45deg, var(--founders-rock), var(--berkeley-blue));
+            --gradient4: linear-gradient(45deg, var(--california-gold), var(--berkeley-gold));
+            --gradient5: linear-gradient(45deg, var(--berkeley-blue), var(--berkeley-gold));
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--berkeley-blue);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--gradient5);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .title {
+            font-size: 1.8rem;
+            color: var(--berkeley-blue);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--founders-rock);
+            margin-top: 10px;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            color: var(--berkeley-blue);
+            line-height: 1.4;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: #fff;
+            color: var(--berkeley-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--berkeley-blue);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        button.primary {
+            background: var(--berkeley-blue);
+            color: var(--berkeley-gold);
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .question {
+                font-size: 1.2rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="title">W190A Dialogue & Reflection Cards</div>
+            <div class="subtitle">Click 'Next Question' to begin</div>
+        </div>
+        <div class="buttons">
+            <button onclick="nextQuestion()" class="primary">Next Question</button>
+            <button onclick="randomQuestion()">Random</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "What advice would you give to your past self at the start of this course?", gradient: "var(--gradient1)" },
+            { text: "What's the most surprising thing you learned about yourself during this class?", gradient: "var(--gradient2)" },
+            { text: "What's a win you're proud of from your DCP project?", gradient: "var(--gradient3)" },
+            { text: "What was the biggest challenge your team faced, and how did you overcome it?", gradient: "var(--gradient4)" },
+            { text: "If you could describe your DCP experience in one word, what would it be?", gradient: "var(--gradient5)" },
+            { text: "What's a skill you developed that you'll take with you into future projects?", gradient: "var(--gradient1)" },
+            { text: "What's a lesson you learned from your course partner or team members?", gradient: "var(--gradient2)" },
+            { text: "How has this class influenced your career goals or next steps?", gradient: "var(--gradient3)" },
+            { text: "What's something you wish you had done differently during this course?", gradient: "var(--gradient4)" },
+            { text: "What's a moment from this class that you'll never forget?", gradient: "var(--gradient5)" },
+            { text: "Which skill or strategy did you rely on the most to navigate challenges in your DCP project, and why?", gradient: "var(--gradient1)" },
+            { text: "What's the most valuable feedback you received this semester?", gradient: "var(--gradient2)" },
+            { text: "If your project had a mascot, what would it be and why?", gradient: "var(--gradient3)" },
+            { text: "What's a tool or resource you discovered that made a big impact on your work?", gradient: "var(--gradient4)" },
+            { text: "What's a moment you felt really connected to your team or partner?", gradient: "var(--gradient5)" },
+            { text: "What advice would you give to next semester's W190A students?", gradient: "var(--gradient1)" },
+            { text: "What's a way this course pushed you outside your comfort zone?", gradient: "var(--gradient2)" },
+            { text: "What's one takeaway from your DCP project you'd like to share with the class?", gradient: "var(--gradient3)" },
+            { text: "How did this course change the way you think about education or changemaking?", gradient: "var(--gradient4)" },
+            { text: "What's a concept or reading from this course that stuck with you?", gradient: "var(--gradient5)" },
+            { text: "What's a fun or unexpected moment that happened during your DCP work?", gradient: "var(--gradient1)" },
+            { text: "If you could thank one person from this course, who would it be and why?", gradient: "var(--gradient2)" },
+            { text: "What's a big idea or insight you'll carry forward into other parts of your life?", gradient: "var(--gradient3)" },
+            { text: "What's something you learned about teamwork through your DCP experience?", gradient: "var(--gradient4)" },
+            { text: "What's a challenge you faced this semester that made you stronger?", gradient: "var(--gradient5)" }
+        ];
+
+        let currentIndex = -1;
+
+        function updateCard(index) {
+            const card = document.querySelector('.card');
+            const question = questions[index];
+            
+            // Remove title and subtitle
+            const title = document.querySelector('.title');
+            const subtitle = document.querySelector('.subtitle');
+            if (title) title.remove();
+            if (subtitle) subtitle.remove();
+            
+            // Add question
+            const questionDiv = card.querySelector('.question') || document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.textContent = question.text;
+            if (!card.contains(questionDiv)) card.appendChild(questionDiv);
+            
+            card.style.setProperty('--gradient1', question.gradient);
+            
+            // Animation
+            card.style.opacity = '0';
+            setTimeout(() => {
+                card.style.opacity = '1';
+            }, 150);
+        }
+
+        function nextQuestion() {
+            currentIndex = (currentIndex + 1) % questions.length;
+            updateCard(currentIndex);
+        }
+
+        function randomQuestion() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * questions.length);
+            } while (newIndex === currentIndex && questions.length > 1);
+            currentIndex = newIndex;
+            updateCard(currentIndex);
+        }
+    </script>
+</body>
+</html>
